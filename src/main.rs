@@ -2,7 +2,7 @@ mod todo;
 use std::env;
 use todo::{Todo, load_todos, save_todos};
 
-fn add(args: Vec<String>, mut todo_vec: Vec<Todo>) {
+fn add(args: &Vec<String>, todo_vec: &mut Vec<Todo>) {
     if args.len() < 3 {
         println!("Please provide a task!");
     } else {
@@ -27,7 +27,7 @@ fn list(todo_vec: &Vec<Todo>) {
     }
 }
 
-fn find(args: Vec<String>, todo_vec: Vec<Todo>) {
+fn find(args: &Vec<String>, todo_vec: &Vec<Todo>) {
     if args.len() < 3 {
         println!("Please provide an id!");
     } else {
@@ -40,7 +40,7 @@ fn find(args: Vec<String>, todo_vec: Vec<Todo>) {
     }
 }
 
-fn mark(args: Vec<String>, mut todo_vec: Vec<Todo>) {
+fn mark(args: &Vec<String>, todo_vec: &mut Vec<Todo>) {
     if args.len() < 4 {
         println!("Usage: todo mark <id> <true|false>");
     } else {
@@ -59,7 +59,7 @@ fn mark(args: Vec<String>, mut todo_vec: Vec<Todo>) {
 }
 
 fn main() {
-    let todo_vec = load_todos();
+    let mut todo_vec = load_todos();
 
     let args: Vec<String> = env::args().collect();
 
@@ -71,12 +71,10 @@ fn main() {
     let command = &args[1];
 
     match command.as_str() {
-        "add" => add(args, todo_vec),
+        "add" => add(&args, &mut todo_vec),
         "list" => list(&todo_vec),
-        "find" => find(args, todo_vec),
-
-        "mark" => mark(args, todo_vec),
-
+        "find" => find(&args, &todo_vec),
+        "mark" => mark(&args, &mut todo_vec),
         _ => println!("Unknown command: {}", command),
     }
 }
