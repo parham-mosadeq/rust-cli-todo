@@ -15,9 +15,9 @@ fn add(args: Vec<String>, mut todo_vec: Vec<Todo>) {
     }
 }
 
-fn list(todo_vec: Vec<Todo>) {
+fn list(todo_vec: &Vec<Todo>) {
     println!("Your todos:");
-    for todo in &todo_vec {
+    for todo in todo_vec {
         println!(
             "[{}] {} - {}",
             todo.id,
@@ -72,7 +72,7 @@ fn main() {
 
     match command.as_str() {
         "add" => add(args, todo_vec),
-        "list" => list(todo_vec),
+        "list" => list(&todo_vec),
         "find" => find(args, todo_vec),
 
         "mark" => mark(args, todo_vec),
