@@ -71,66 +71,12 @@ fn main() {
     let command = &args[1];
 
     match command.as_str() {
-        "add" => {
-            add(args, todo_vec)
-            // if args.len() < 3 {
-            //     println!("Please provide a task!");
-            // } else {
-            //     let task = &args[2];
-            //     let id = (todo_vec.len() as u32) + 1;
-            //     let new_task = Todo::new(id, task.to_string());
-            //     todo_vec.push(new_task);
-            //     save_todos(&todo_vec);
-            //     println!("Task added!");
-            // }
-        }
-        "list" => {
-            // println!("Your todos:");
-            // for todo in &todo_vec {
-            //     println!(
-            //         "[{}] {} - {}",
-            //         todo.id,
-            //         todo.task,
-            //         if todo.done { "done" } else { "pending" }
-            //     );
-            // }
-            list(todo_vec)
-        }
-        "find" => {
-            find(args, todo_vec);
-            // if args.len() < 3 {
-            //     println!("Please provide an id!");
-            // } else {
-            //     let id: u32 = args[2].parse().unwrap();
-            //     if let Some(todo) = todo_vec.iter().find(|t| t.id == id) {
-            //         println!("Found: {:?}", todo);
-            //     } else {
-            //         println!("No todo found with id {}", id);
-            //     }
-            // }
-        }
+        "add" => add(args, todo_vec),
+        "list" => list(todo_vec),
+        "find" => find(args, todo_vec),
 
-        "mark" => {
-            mark(args, todo_vec);
-            // if args.len() < 4 {
-            //     println!("Usage: todo mark <id> <true|false>");
-            // } else {
-            //     let id: u32 = args[2].parse().unwrap();
-            //     let is_done: bool = args[3].parse().unwrap_or(false);
+        "mark" => mark(args, todo_vec),
 
-            //     if let Some(todo) = todo_vec.iter_mut().find(|t| t.id == id) {
-            //         todo.done = is_done;
-            //         todo.modified_at = chrono::Local::now().to_string();
-            //         save_todos(&todo_vec); // don’t forget to persist
-            //         println!("Todo {} marked as {}", id, is_done);
-            //     } else {
-            //         println!("No todo found with id {}", id);
-            //     }
-            // }
-        }
-
-        _ => {
-            println!("Unknown command: {}", command);
-        }
+        _ => println!("Unknown command: {}", command),
     }
 }
